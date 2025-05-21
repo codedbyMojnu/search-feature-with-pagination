@@ -1,5 +1,5 @@
-import Posts from "./Posts";
+import CheckUserStatus from "./CheckUserStatus";
 
 export default function App() {
-  return <Posts />;
+  return <CheckUserStatus />;
 }
