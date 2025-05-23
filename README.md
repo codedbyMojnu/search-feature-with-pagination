@@ -12,7 +12,7 @@ The goal is to give a cleaner and faster browsing experience without loading all
 
 ## 🚀 Live Site
 
-[Click here to visit the Live Site](search-and-pagination-feature.vercel.app)
+[Click here to visit the Live Site](https://search-and-pagination-olive.vercel.app/)
 
 ---
 
