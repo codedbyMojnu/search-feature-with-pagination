@@ -1,146 +1,93 @@
-# Toggle Component (React + Tailwind CSS)
+# 🔍 Search & Dynamic Pagination UI Feature
 
-This `Toggle` component is a simple on/off switch built using React and Tailwind CSS. It's reusable, responsive, and comes with smooth animations.
+This project is a simple and effective feature that allows users to:
 
-## ✅ Features
+1. 🔎 Search specific topics through an input field.
+2. 🌐 Fetch data from the server using that query via API.
+3. 📄 Display the fetched results in a paginated format, dynamically sliced based on the selected page.
 
-- Toggles between ON/OFF states on click
-- Smooth animated transition
-- Fully customizable using props
-- Styled using Tailwind CSS utility classes
-
-## 🧩 How It Works
-
-- `isOn`: A boolean prop that determines the current toggle state
-- `onToggle`: A callback function that gets triggered when the toggle is clicked
-
-## 🧪 Usage Example
-
-```jsx
-// Toggle.js
-
-export default function Toggle({ isOn, onToggle }) {
-  return (
-    <div
-      onClick={onToggle}
-      className={`w-24 h-12 flex items-center px-1 rounded-full cursor-pointer transition-colors duration-300
-        ${isOn ? "bg-green-500" : "bg-gray-400"}`}
-    >
-      <div
-        className={`w-10 h-10 rounded-full bg-white shadow-md transition-transform duration-300
-          ${isOn ? "translate-x-12" : "translate-x-0"}`}
-      />
-    </div>
-  );
-}
-```
-
-## 💡 Code Explanation
-
-```jsx
-// App.js (Parent component)
-import { useState } from "react";
-import Toggle from "./Toggle";
-
-export default function App() {
-  const [flashOn, setFlashOn] = useState(false);
-
-  function handleChange() {
-    setFlashOn(!flashOn);
-  }
-
-  return (
-    <div className="mt-2 ml-2">
-      <Toggle isOn={flashOn} onToggle={handleChange} />
-      <p className="mt-2 text-xl font-bold">
-        Flashlight is {flashOn ? "ON 🔦" : "OFF 🌑"}
-      </p>
-    </div>
-  );
-}
-```
-
-```jsx
-className={... ${isOn ? "bg-green-500" : "bg-gray-400"}}
-```
-
-- Background turns green when `isOn` is `true`, otherwise gray.
-
-```jsx
-className={... ${isOn ? "translate-x-12" : "translate-x-0"}}
-```
-
-- The white circle slides to the right when the toggle is on.
-
-## 🛠️ Requirements
-
-- React 17 or higher
-- Tailwind CSS should be properly configured in your project
-
-## 📂 File Structure
-
-```
-/src
-  └── Toggle.js
-```
-
-## 📜 License
-
-This component is free to use in personal and commercial projects.
+The goal is to give a cleaner and faster browsing experience without loading all data at once.
 
 ---
 
-## 🤝 Contribution Guidelines
+## 🚀 Live Site
 
-Want to contribute to this project? Follow these steps:
-
-1. **Fork the repository**
-
-   - Click the `Fork` button on the top-right of this repo.
-
-2. **Clone the repo to your local machine**
-
-   ```bash
-   git clone https://github.com/your-username/Toggle.git
-   cd Toggle
-   ```
-
-3. **Create a new branch**
-
-   ```bash
-   git checkout -b feature/your-branch-name
-   ```
-
-4. **Make your changes**
-
-   - Add new features or fix bugs.
-
-5. **Commit your changes**
-
-   ```bash
-   git add .
-   git commit -m "A short but clear commit message"
-   ```
-
-6. **Push to GitHub**
-
-   ```bash
-   git push origin your-branch-name
-   ```
-
-7. **Submit a Pull Request**
-
-   - Open a PR from your forked repository.
-   - Describe the changes you’ve made.
-
-### 🧷 Contribution Rules
-
-- Keep your code clean and readable.
-- Follow Tailwind CSS best practices.
-- Use clear and meaningful commit messages.
-- Reference any related issue in the pull request if applicable.
+[Click here to visit the Live Site](search-and-pagination-feature.vercel.app)
 
 ---
 
-**Author:** Md. Mojnu Miah
-**Country:** Bangladesh
+## 🛠️ How to Run the Project
+
+1. **Clone the repo:**
+
+   ```bash
+   git clone https://github.com/codedbyMojnu/search-feature-with-pagination.git
+   cd search-feature-with-pagination
+   ```
+
+````
+
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+````
+
+3. **Create your GitHub API key:**
+
+   - Go to your [GitHub Developer Settings](https://github.com/settings/tokens)
+   - Create a new token with required permissions
+   - Copy the token
+
+4. **Create a `.env` file in the root folder:**
+
+   ```env
+   VITE_GITHUB_API=your_api_key
+   ```
+
+5. **Start the development server:**
+
+   ```bash
+   npm run dev
+   ```
+
+---
+
+## 🧠 How It Works
+
+- The **search box** takes user input and triggers an API fetch from GitHub based on the query.
+- The data is dynamically sliced per page:
+
+  - Page 1: shows the first set of items.
+  - Page 2 or others: shows the next slices accordingly.
+
+- Pagination is dynamically rendered and updates the visible data when a user clicks a page number.
+
+---
+
+## 🤝 How to Contribute
+
+Want to contribute like a boss?
+
+1. Fork the repo
+2. Create your feature branch: `git checkout -b feature/YourFeature`
+3. Commit your changes: `git commit -m "Add your feature"`
+4. Push to the branch: `git push origin feature/YourFeature`
+5. Create a Pull Request
+
+All clean and helpful contributions are welcome ❤️
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License]("/LICENSE") — feel free to use, share, and build on it.
+
+---
+
+## ✨ Crafted with care by
+
+### **Mojnu**
+
+Your React + Tailwind hero from Bangladesh 🇧🇩
+Keep learning, keep building!
