@@ -55,7 +55,9 @@ export default function App() {
   return (
     <>
       <SearchBox onQueryChange={handleSearchQuery} query={query} />
+
       <UsersInfo searchQuery={query} usersData={sliceData} />
+
       <Pagination
         pageNumbers={dynamicPageNumbers}
         onPageValueChange={handlePageValueChange}

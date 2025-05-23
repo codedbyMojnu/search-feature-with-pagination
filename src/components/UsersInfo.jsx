@@ -1,7 +1,7 @@
 export default function Data({ searchQuery, usersData }) {
   console.log(usersData);
   return (
-    <div className="flex justify-around items-center">
+    <div className="flex justify-center items-center gap-6">
       {searchQuery.trim() !== "" &&
         usersData?.map((user) => (
           <div
