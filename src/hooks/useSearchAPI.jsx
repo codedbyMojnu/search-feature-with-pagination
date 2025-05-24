@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useGithubUsersAPI(searchQuery) {
+export default function useSearchAPI(searchQuery) {
   const [data, setData] = useState(null);
   useEffect(() => {
     let ignore = false;
@@ -12,7 +12,7 @@ export default function useGithubUsersAPI(searchQuery) {
 
       async function fetchUsers() {
         await fetch(
-          `${import.meta.env.VITE_SERVER_BASE_API_URL}=${searchQuery}`,
+          `${import.meta.env.VITE_SERVER_BASE_API_URL}?q=${searchQuery}`,
           {
             headers: {
               Authorization: `Bearer ${import.meta.env.VITE_AUTH_TOKEN}`,

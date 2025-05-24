@@ -18,7 +18,7 @@ VITE_SERVER_BASE_API_URL=your_searchable_api_url
 ### Example API call (inside `hooks/useSearchAPI.js`):
 
 ```js
-await fetch(`${import.meta.env.VITE_SERVER_BASE_API_URL}=${searchQuery}`, {
+await fetch(`${import.meta.env.VITE_SERVER_BASE_API_URL}?q=${searchQuery}`, {
   headers: {
     Authorization: `Bearer ${import.meta.env.VITE_AUTH_TOKEN}`,
   },
