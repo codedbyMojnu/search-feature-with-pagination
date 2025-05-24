@@ -1,30 +1,35 @@
-// এই পেজিনেশনটি আমাদের টোটাল ৪ টি প্যারামিটার লাগবে
-// ১। TotalPage কয়টা হবে তা হিসাব করা। (TotalItems / ItemsPerPage + 1) ItemsPerPage = value we set
-// ২। Current Page Value কত? 
-// ৩।  UI এ maxVisiblePage কয়টা হবে, সেই ভেলু দিই। 
+// ✅ Pagination তৈরির জন্য দরকার হয় ৪টি প্যারামিটার:
+// ১. currentValue: ইউজার এখন কোন পেজে আছেন
+// ২. maxVisiblePages: UI-তে একসাথে কয়টা পেজ নাম্বার দেখাবো
+// ৩. itemsPerPage: প্রতি পেজে কয়টা আইটেম দেখাবো
+// ৪. totalItems: মোট কয়টা ডাটা আছে
 
-export default function getDynamicPageNumbers(currentValue, maxVisiblePages, itemsPerPage, totalItems) {
+export default function getDynamicPageNumbers(
+    currentValue,
+    maxVisiblePages,
+    itemsPerPage,
+    totalItems
+) {
+    // মোট কতগুলো পেজ লাগবে, তা হিসাব করি
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-    const totalPage = Math.ceil(totalItems / itemsPerPage);
-    // সক্রিয় পেজ ভেলুর মান নিয়ে নতুন Pages Return করার জন্য start মান কত হবে তা হিসাব করা
-    let start = Math.max(currentValue - (Math.floor(maxVisiblePages / 2)), 1);
-    // সক্রিয় পেজ ভেলুর মানটি নিয়ে নতুন Pages Return করার জন্য end মান কত হবে তা হিসাব করা 
+    // ✅ visible পেজগুলো কোথা থেকে শুরু হবে তা নির্ধারণ করি
+    let start = Math.max(currentValue - Math.floor(maxVisiblePages / 2), 1);
+
+    // ✅ শেষ পেজ নাম্বার নির্ধারণ করি
     let end = start + maxVisiblePages - 1;
 
-    // যদি সক্রিয় পেজ ভেলুর মানের জন্য end মানটি totalPage এর থেকে বড় হয়ে যায়
-    if (end > totalPage) {
-        // সেক্ষেত্রে end হবে totalPage এর মানটি 
-        end = totalPage;
-        // এবং start এর মানটি হিসেব করে নিতে হবে 
-        start = Math.max(end - maxVisiblePages + 1, 1)
+    // ✅ যদি end পেজটি totalPages এর চেয়ে বেশি হয়ে যায়, তাহলে সেটি ঠিক করি
+    if (end > totalPages) {
+        end = totalPages;
+        start = Math.max(end - maxVisiblePages + 1, 1); // আবার start ঠিক করে নেই
     }
 
+    // ✅ নির্ধারিত start থেকে end পর্যন্ত পেজ নাম্বার তৈরি করি
     const pages = [];
-
     for (let i = start; i <= end; i++) {
         pages.push(i);
     }
-
 
     return pages;
 }

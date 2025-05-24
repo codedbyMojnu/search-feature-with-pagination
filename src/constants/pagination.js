@@ -1,2 +1,2 @@
-export const USERS_PER_PAGE = 3;
-export const MAX_VISIBLE_PAGE = 5;
+export const DATA_PER_PAGE = 6;
+export const MAX_VISIBLE_PAGE = 7;
