@@ -12,7 +12,9 @@ export default function useSearchAPI(searchQuery) {
 
       async function fetchUsers() {
         await fetch(
-          `${import.meta.env.VITE_SERVER_BASE_API_URL}?q=${searchQuery}`,
+          `${
+            import.meta.env.VITE_SERVER_BASE_API_URL
+          }/search/users?q=${searchQuery}`,
           {
             headers: {
               Authorization: `Bearer ${import.meta.env.VITE_AUTH_TOKEN}`,
