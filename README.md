@@ -1,4 +1,4 @@
-# Search Data via API and display results with Dynamic Pagination in React
+# React Search with API & Dynamic Pagination
 
 A **reusable React component** that lets you search data from any API and display the results in a clean, dynamic pagination UI.
 
@@ -6,9 +6,9 @@ Perfect for developers building fast, user-friendly search experiences without l
 
 ## ✨ Features
 
-✅ Fetch and display API data based on search queries
-✅ Paginate results dynamically — no extra work needed
-✅ Easily plug in your own API by updating just two `.env` values:
+1. Fetch and display API data based on search queries
+2. Paginate results dynamically — no extra work needed
+3. Easily plug in your own API by updating just two `.env` values:
 
 ```env
 VITE_AUTH_TOKEN=your_api_token
