@@ -11,11 +11,14 @@ export default function useGithubUsersAPI(searchQuery) {
       }
 
       async function fetchUsers() {
-        await fetch(`https://api.github.com/search/users?q=${searchQuery}`, {
-          headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
-          },
-        })
+        await fetch(
+          `${import.meta.env.VITE_SERVER_BASE_API_URL}=${searchQuery}`,
+          {
+            headers: {
+              Authorization: `Bearer ${import.meta.env.VITE_AUTH_TOKEN}`,
+            },
+          }
+        )
           .then((response) => response.json())
           .then((data) => {
             if (!ignore) {

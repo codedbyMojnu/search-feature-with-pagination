@@ -1,93 +1,152 @@
-# 🔍 Search & Dynamic Pagination UI Feature
+# Search Data via API and display results with Dynamic Pagination in React
 
-This project is a simple and effective feature that allows users to:
+A **reusable React component** that lets you search data from any API and display the results in a clean, dynamic pagination UI.
 
-1. 🔎 Search specific topics through an input field.
-2. 🌐 Fetch data from the server using that query via API.
-3. 📄 Display the fetched results in a paginated format, dynamically sliced based on the selected page.
+Perfect for developers building fast, user-friendly search experiences without loading all data at once.
 
-The goal is to give a cleaner and faster browsing experience without loading all data at once.
+## ✨ Features
 
----
+✅ Fetch and display API data based on search queries
+✅ Paginate results dynamically — no extra work needed
+✅ Easily plug in your own API by updating just two `.env` values:
 
-## 🚀 Live Site
+```env
+VITE_AUTH_TOKEN=your_api_token
+VITE_SERVER_BASE_API_URL=your_searchable_api_url
+```
 
-[Click here to visit the Live Site](https://search-and-pagination-olive.vercel.app/)
+### Example API call (inside `hooks/useSearchAPI.js`):
 
----
-
-## 🛠️ How to Run the Project
-
-1. **Clone the repo:**
-
-   ```bash
-   git clone https://github.com/codedbyMojnu/search-feature-with-pagination.git
-   cd search-feature-with-pagination
-   ```
-
-````
-
-2. **Install dependencies:**
-
-   ```bash
-   npm install
-````
-
-3. **Create your GitHub API key:**
-
-   - Go to your [GitHub Developer Settings](https://github.com/settings/tokens)
-   - Create a new token with required permissions
-   - Copy the token
-
-4. **Create a `.env` file in the root folder:**
-
-   ```env
-   VITE_GITHUB_API=your_api_key
-   ```
-
-5. **Start the development server:**
-
-   ```bash
-   npm run dev
-   ```
+```js
+await fetch(`${import.meta.env.VITE_SERVER_BASE_API_URL}=${searchQuery}`, {
+  headers: {
+    Authorization: `Bearer ${import.meta.env.VITE_AUTH_TOKEN}`,
+  },
+});
+```
 
 ---
 
-## 🧠 How It Works
+## Live Demo
 
-- The **search box** takes user input and triggers an API fetch from GitHub based on the query.
-- The data is dynamically sliced per page:
-
-  - Page 1: shows the first set of items.
-  - Page 2 or others: shows the next slices accordingly.
-
-- Pagination is dynamically rendered and updates the visible data when a user clicks a page number.
+See it in action:
+👉 [Live Preview](https://search-and-pagination-olive.vercel.app/)
 
 ---
 
-## 🤝 How to Contribute
+## Run Locally for Development
 
-Want to contribute like a boss?
+1. **Clone the Repository**
+
+```bash
+git clone https://github.com/codedbyMojnu/search-feature-with-pagination.git
+cd search-feature-with-pagination
+```
+
+2. **Install Dependencies**
+
+```bash
+npm install
+```
+
+3. **Set Up Environment Variables**
+
+Create a `.env` file in the root folder:
+
+```env
+VITE_AUTH_TOKEN=your_github_token
+VITE_SERVER_BASE_API_URL=your_searchable_api_url
+```
+
+4. **Start the Development Server**
+
+```bash
+npm run dev
+```
+
+---
+
+## 📁 Folder Structure
+
+```
+src/
+├── components/
+│   ├── Pagination.jsx         # Dynamic pagination UI
+│   ├── SearchBox.jsx          # Input field for search
+│   └── UsersInfo.jsx          # Renders fetched results
+│
+├── hooks/
+│   └── useGithubUsersAPI.js   # Custom hook for data fetching
+│
+├── utils/
+│   └── get-dynamic-page-numbers.js  # Pagination logic
+│
+├── constants/
+│   └── pagination.js          # Constants (e.g., USERS_PER_PAGE)
+│
+└── App.jsx
+```
+
+Here’s a clear and readable **“Configuration Values”** section you can add to your `README.md` to explain `USERS_PER_PAGE` and `MAX_VISIBLE_PAGE`:
+
+---
+
+## ⚙️ Configuration Values
+
+This component is designed to be **flexible and developer-friendly** — you control how many results show per page and how many page buttons appear in the pagination UI.
+
+Update these values inside `src/constants/pagination.js`:
+
+```js
+export const USERS_PER_PAGE = 3; // Number of results to show per page
+export const MAX_VISIBLE_PAGE = 5; // Max number of pagination buttons visible at a time
+```
+
+## How It Works:
+
+- `USERS_PER_PAGE`
+  Controls how many results are shown per page. You can change this to 5, 10, 20 — or anything that suits your layout or data.
+
+- `MAX_VISIBLE_PAGE`
+  Controls how many page numbers are shown in the pagination bar at once. If you have many pages, only this number will be shown, with dynamic shifting (e.g., "1 2 3 4 5", then "2 3 4 5 6", etc.).
+
+> This gives you full control to adjust the pagination behavior for any project or dataset.
+
+1. User enters a keyword in the search box.
+2. Component fetches search results from your API using that query.
+3. Results are paginated automatically (e.g., Page 1, Page 2...).
+4. Clicking a page updates the view — no page reloads.
+
+> 🔄 Fast, dynamic browsing experience built with React + Tailwind CSS.
+
+---
+
+## 🤝 Contribute
+
+Want to improve it? You're welcome! 🚀
 
 1. Fork the repo
-2. Create your feature branch: `git checkout -b feature/YourFeature`
-3. Commit your changes: `git commit -m "Add your feature"`
-4. Push to the branch: `git push origin feature/YourFeature`
-5. Create a Pull Request
-
-All clean and helpful contributions are welcome ❤️
+2. Create your feature branch:
+   `git checkout -b feature/your-feature-name`
+3. Commit your code:
+   `git commit -m "Add your feature"`
+4. Push to GitHub:
+   `git push origin feature/your-feature-name`
+5. Open a Pull Request ❤️
 
 ---
 
 ## 📄 License
 
-This project is licensed under the [MIT License]("/LICENSE") — feel free to use, share, and build on it.
+Released under the [MIT License](/LICENSE) — use it, modify it, share it.
 
 ---
 
-## ✨ Crafted with care by
+## 👨‍💻 Made by
 
-### **Mojnu**
+### **Md. Mojnu Miah**
 
-Your React + Tailwind hero from Bangladesh 🇧🇩
-Keep learning, keep building!
+React + Tailwind Developer from Bangladesh 🇧🇩
+GitHub: [@codedbyMojnu](https://github.com/codedbyMojnu)
+
+> Keep learning. Keep building. Keep sharing.

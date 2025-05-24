@@ -3,7 +3,7 @@ import Pagination from "./components/Pagination";
 import SearchBox from "./components/SearchBox";
 import UsersInfo from "./components/UsersInfo";
 import { MAX_VISIBLE_PAGE, USERS_PER_PAGE } from "./constants/pagination";
-import useGithubUsersAPI from "./hooks/useGithubUsersAPI";
+import useSearchAPI from "./hooks/useSearchAPI";
 import getDynamicPageNumbers from "./utils/get-dynamic-page-numbers";
 
 export default function App() {
@@ -12,7 +12,7 @@ export default function App() {
   const [dynamicPageNumbers, setDynamicPageNumbers] = useState([]);
   const [slicedData, setslicedData] = useState([]);
 
-  const usersData = useGithubUsersAPI(query);
+  const usersData = useSearchAPI(query);
 
   useEffect(() => {
     setCurrentPage(1);
