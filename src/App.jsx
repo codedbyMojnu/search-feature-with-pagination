@@ -2,65 +2,49 @@ import { useEffect, useState } from "react";
 import Pagination from "./components/Pagination";
 import SearchBox from "./components/SearchBox";
 import UsersInfo from "./components/UsersInfo";
+import { MAX_VISIBLE_PAGE, USERS_PER_PAGE } from "./constants/pagination";
 import useGithubUsersAPI from "./hooks/useGithubUsersAPI";
 import getDynamicPageNumbers from "./utils/get-dynamic-page-numbers";
 
 export default function App() {
   const [query, setQuery] = useState("");
-  const [dynamicPageNumbers, setDynamicPageNumbers] = useState(null);
-  const [currentPageValue, setCurrentPageValue] = useState(1);
-  const [sliceData, setSliceData] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [dynamicPageNumbers, setDynamicPageNumbers] = useState([]);
+  const [slicedData, setslicedData] = useState([]);
+
   const usersData = useGithubUsersAPI(query);
 
-  let usersDataPerPage = 3;
-  let maxVisiblePage = 5;
-
   useEffect(() => {
-    // Whenever the search query changes, reset to first page
-    setCurrentPageValue(1);
+    setCurrentPage(1);
   }, [query]);
 
   useEffect(() => {
-    const sliceUserData = usersData?.items?.slice(
-      (currentPageValue - 1) * usersDataPerPage,
-      currentPageValue * usersDataPerPage
-    );
+    const items = usersData?.items || [];
+    const start = (currentPage - 1) * USERS_PER_PAGE;
+    const end = currentPage * USERS_PER_PAGE;
 
-    setSliceData(sliceUserData);
-  }, [usersData, currentPageValue, usersDataPerPage]);
+    setslicedData(items.slice(start, end));
 
-  useEffect(() => {
     const pageNumbers = getDynamicPageNumbers(
-      currentPageValue,
-      maxVisiblePage,
-      usersDataPerPage,
-      usersData?.items.length
+      currentPage,
+      MAX_VISIBLE_PAGE,
+      USERS_PER_PAGE,
+      items.length
     );
+
     setDynamicPageNumbers(pageNumbers);
-  }, [
-    currentPageValue,
-    maxVisiblePage,
-    usersDataPerPage,
-    usersData?.items?.length,
-  ]);
-
-  function handleSearchQuery(searchQuery) {
-    setQuery(searchQuery);
-  }
-
-  function handlePageValueChange(pageNumber) {
-    setCurrentPageValue(pageNumber);
-  }
+  }, [usersData, currentPage]);
 
   return (
     <>
-      <SearchBox onQueryChange={handleSearchQuery} query={query} />
+      <SearchBox onQueryChange={setQuery} query={query} />
 
-      <UsersInfo searchQuery={query} usersData={sliceData} />
+      <UsersInfo searchQuery={query} usersData={slicedData} />
 
       <Pagination
         pageNumbers={dynamicPageNumbers}
-        onPageValueChange={handlePageValueChange}
+        onPageValueChange={setCurrentPage}
+        currentPage={currentPage}
       />
     </>
   );

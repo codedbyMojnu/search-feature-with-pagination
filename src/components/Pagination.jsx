@@ -1,29 +1,42 @@
-import { useState } from "react";
-
-export default function Pagination({ onPageValueChange, pageNumbers }) {
-  const [acitvePage, setActivePage] = useState(1);
-
-  function handleActivePage(number) {
-    setActivePage(number);
-  }
+// src/components/Pagination.jsx
+export default function Pagination({
+  onPageValueChange,
+  pageNumbers,
+  currentPage,
+}) {
   return (
-    <div className="flex justify-center items-center m-4">
-      {pageNumbers?.map((number, index) => (
+    <div className="flex justify-center items-center m-4 gap-1">
+      {pageNumbers?.length > 0 && (
         <button
-          onClick={() => {
-            onPageValueChange(number);
-            handleActivePage(number);
-          }}
-          key={index}
-          className={`mx-1 px-4 py-2 text-sm font-medium  border border-gray-300 rounded hover:bg-gray-100 ${
-            acitvePage === number
-              ? "bg-blue-500 text-white"
-              : "bg-white text-gray-700 "
+          disabled={currentPage === 1}
+          onClick={() => onPageValueChange(currentPage - 1)}
+          className="px-3 py-1 border rounded disabled:opacity-50"
+        >
+          &laquo;
+        </button>
+      )}
+
+      {pageNumbers?.map((number) => (
+        <button
+          onClick={() => onPageValueChange(number)}
+          key={number}
+          className={`px-3 py-1 border rounded ${
+            currentPage === number ? "bg-blue-500 text-white" : ""
           }`}
         >
           {number}
         </button>
       ))}
+
+      {pageNumbers?.length > 0 && (
+        <button
+          disabled={currentPage === pageNumbers[pageNumbers.length - 1]}
+          onClick={() => onPageValueChange(currentPage + 1)}
+          className="px-3 py-1 border rounded disabled:opacity-50"
+        >
+          &raquo;
+        </button>
+      )}
     </div>
   );
 }
